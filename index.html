@@ -6,13 +6,13 @@
 <title>LABMAP.S - Inicial</title>
 <style>
 body{
-  margin:0; padding:0; font-family:"Inter",sans-serif; color:#222; overflow-x:hidden;
+  margin:0; padding:0; font-family:"Inter",sans-serif; color:#222; overflow-x:hidden; background:#f2ede8;
 }
 header{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  padding:28px 80px;
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:28px 60px;
   position:fixed;
   width:100%;
   top:0;
@@ -21,24 +21,24 @@ header{
   box-shadow:0 2px 5px rgba(0,0,0,0.05);
   z-index:100;
 }
-.menu-esquerdo, .menu-direito{
+.menu{
   display:flex;
   gap:40px;
 }
-.menu-esquerdo a, .menu-direito a{
+.menu a{
   text-decoration:none;
   color:#222;
   font-weight:600;
   font-size:1.5rem;
   transition:0.2s;
 }
-.menu-esquerdo a:hover, .menu-direito a:hover{
+.menu a:hover{
   color:#00796b;
 }
-.menu-direito{
-  justify-content:flex-end;
+.logo img{
+  height:75px;
+  cursor:pointer;
 }
-.logo img{height:75px; cursor:pointer;}
 main{
   display:flex;
   justify-content:center;
@@ -62,7 +62,6 @@ footer{
   padding:20px 40px;
   text-align:center;
   border-top:1px solid #ddd;
-  margin-top:50px;
   position:relative;
   z-index:1;
 }
@@ -83,10 +82,10 @@ footer p{font-size:0.9rem;color:#555;margin:0;}
   z-index:-1;
 }
 @media(max-width:900px){
-  header{grid-template-columns:1fr;gap:10px;padding:20px;}
-  .logo{grid-column:1/-1;justify-self:center;}
-  .menu-esquerdo, .menu-direito{justify-content:center; gap:20px;}
-  .menu-esquerdo a, .menu-direito a{font-size:1.2rem;}
+  header{flex-direction:column; gap:15px; padding:20px;}
+  .logo{order:0;}
+  .menu{gap:20px;}
+  .menu a{font-size:1.2rem;}
   main{padding:150px 20px 0;}
   footer .footer-logo img{height:40px;}
 }
@@ -97,14 +96,14 @@ footer p{font-size:0.9rem;color:#555;margin:0;}
 <canvas id="fundo-canvas"></canvas>
 
 <header>
-  <nav class="menu-esquerdo">
+  <nav class="menu menu-esquerdo">
     <a href="projetos.html">Projetos</a>
     <a href="jogos.html">Jogos</a>
   </nav>
   <div class="logo">
     <a href="index.html"><img src="logo/LOGO_LABMAP.S.png" alt="Logo LABMAP"></a>
   </div>
-  <nav class="menu-direito">
+  <nav class="menu menu-direito">
     <a href="recursos.html">Recursos</a>
     <a href="contato.html">Contato</a>
   </nav>
@@ -132,43 +131,43 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Criar pontos para linhas sinuosas (rios/estradas)
-const points = [];
-const numPoints = 20;
-for(let i=0;i<numPoints;i++){
-  points.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3});
+// Configuração das curvas de nível
+const lines = [];
+const numLines = 12;
+const spacing = 40;
+for(let i=0;i<numLines;i++){
+  const yOffset = i*spacing + 50;
+  const points = [];
+  const numPoints = 25;
+  for(let j=0;j<numPoints;j++){
+    points.push({x:j*(canvas.width/numPoints), y:yOffset + Math.sin(j/2 + i)*15, vy:Math.random()*0.3-0.15});
+  }
+  lines.push(points);
 }
 
-function drawLines(){
+function drawContours(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle='rgba(0,100,200,0.5)';
+  ctx.strokeStyle = 'rgba(0,100,200,0.5)';
   ctx.lineWidth = 2;
-  ctx.beginPath();
-  for(let i=0;i<points.length;i++){
-    const p = points[i];
-    if(i===0) ctx.moveTo(p.x,p.y);
-    else ctx.lineTo(p.x,p.y);
-    // atualizar posição
-    p.x += p.vx;
-    p.y += p.vy;
-    if(p.x<0) p.x=canvas.width; if(p.x>canvas.width) p.x=0;
-    if(p.y<0) p.y=canvas.height; if(p.y>canvas.height) p.y=0;
-  }
-  ctx.stroke();
 
-  // pontos
-  points.forEach(p=>{
+  lines.forEach(points=>{
     ctx.beginPath();
-    ctx.arc(p.x,p.y,3,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,150,220,0.7)';
-    ctx.fill();
+    ctx.moveTo(points[0].x, points[0].y);
+    for(let i=1;i<points.length;i++){
+      ctx.lineTo(points[i].x, points[i].y);
+      // animar suavemente
+      points[i].y += points[i].vy;
+      if(points[i].y<0) points[i].y = canvas.height;
+      if(points[i].y>canvas.height) points[i].y = 0;
+    }
+    ctx.stroke();
   });
 
-  requestAnimationFrame(drawLines);
+  requestAnimationFrame(drawContours);
 }
-drawLines();
+drawContours();
 
-window.addEventListener('resize',()=>{
+window.addEventListener('resize', ()=>{
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
