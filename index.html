@@ -19,7 +19,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 80px;
+      padding: 28px 100px;
       position: fixed;
       width: 100%;
       top: 0;
@@ -32,14 +32,14 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 60px;
     }
 
     nav a {
       text-decoration: none;
       color: #222;
       font-weight: 600;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       transition: 0.2s ease;
       letter-spacing: 0.5px;
     }
@@ -56,7 +56,7 @@
     }
 
     .logo img {
-      height: 55px;
+      height: 75px;
       cursor: pointer;
     }
 
@@ -67,32 +67,32 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      padding: 130px 20px 0;
+      padding: 160px 20px 0;
       box-sizing: border-box;
     }
 
     .sobre {
-      max-width: 750px;
+      max-width: 850px;
     }
 
     .sobre h1 {
-      font-size: 2.3rem;
+      font-size: 2.6rem;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .sobre p {
-      font-size: 1.2rem;
-      line-height: 1.7;
+      font-size: 1.3rem;
+      line-height: 1.8;
       color: #333;
     }
 
     /* --- RESPONSIVIDADE --- */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       header {
         flex-direction: column;
         gap: 10px;
-        padding: 15px;
+        padding: 20px;
       }
 
       .logo {
@@ -102,15 +102,15 @@
       }
 
       nav {
-        gap: 25px;
+        gap: 30px;
       }
 
       nav a {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
 
       main {
-        padding: 140px 20px 0;
+        padding: 150px 20px 0;
       }
     }
   </style>
@@ -122,6 +122,8 @@
     <nav>
       <a href="#projetos">Projetos</a>
       <a href="#jogos">Jogos</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#contato">Contato</a>
     </nav>
 
     <!-- LOGO CENTRAL -->
@@ -131,10 +133,9 @@
       </a>
     </div>
 
-    <!-- MENU DIREITO -->
+    <!-- MENU DIREITO (opcional, pode duplicar ou remover) -->
     <nav>
-      <a href="#recursos">Recursos</a>
-      <a href="#contato">Contato</a>
+      <!-- pode deixar vazio ou adicionar links futuros -->
     </nav>
   </header>
 
@@ -150,4 +151,3 @@
 
 </body>
 </html>
-
