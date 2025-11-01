@@ -1,207 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LABMAP.S - Inicial</title>
-<style>
-body{
-  margin:0; 
-  font-family:"Inter",sans-serif; 
-  color:#222; 
-  overflow-x:hidden; 
-  background:#f2ede8;
-}
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 50px;
-  position:fixed;
-  width:100%;
-  background:#f2ede8;
-  box-shadow:0 2px 5px rgba(0,0,0,0.05);
-  z-index:100;
-}
-.menu-left, .menu-right{
-  display:flex;
-  gap:40px;
-  flex:1;
-}
-.menu-left{
-  justify-content: flex-end;
-}
-.menu-right{
-  justify-content: flex-start;
-}
-.menu-left a, .menu-right a{
-  text-decoration:none;
-  color:#222;
-  font-weight:600;
-  font-size:1.3rem;
-}
-.menu-left a:hover, .menu-right a:hover{
-  color:#00796b;
-}
-.logo{
-  flex-shrink:0;
-  margin:0 40px;
-}
-.logo img{
-  height:60px;
-  display:block;
-}
-main{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-  padding:160px 20px 0;
-  position:relative;
-  z-index:1;
-}
-.sobre{
-  max-width:850px;
-  background:rgba(255,255,255,0.85);
-  padding:30px;
-  border-radius:12px;
-}
-.sobre h1{font-size:2.6rem; margin-bottom:20px;}
-.sobre p{font-size:1.3rem; line-height:1.8; color:#333;}
-footer{
-  background-color:#f2ede8;
-  padding:20px 40px;
-  text-align:center;
-  border-top:1px solid #ddd;
-  position:relative;
-  z-index:1;
-}
-footer .footer-content{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-}
-footer .footer-logo img{height:50px;}
-footer p{font-size:0.9rem;color:#555;margin:0;}
-#fundo-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-}
-/* Responsivo */
-@media(max-width:900px){
-  header{
-    flex-direction:column; 
-    gap:15px; 
-    padding:20px;
-  }
-  .menu-left, .menu-right{
-    justify-content:center; 
-    gap:20px;
-  }
-  .logo{
-    margin:10px 0;
-  }
-  .logo img{
-    height:50px;
-  }
-  main{
-    padding:150px 20px 0;
-  }
-  footer .footer-logo img{
-    height:40px;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labmap</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="logo">
+    <h1>LABMAP</h1>
+  </header>
 
-<canvas id="fundo-canvas"></canvas>
+  <main class="island-container">
+    <img src="https://i.imgur.com/TYmlVHw.png" alt="Ilha" class="island" />
+    
+    <div class="map-point" style="top: 35%; left: 45%;" data-link="projetos.html">
+      <span>Projetos</span>
+    </div>
 
-<header>
-  <nav class="menu-left">
-    <a href="projetos.html">Projetos</a>
-    <a href="jogos.html">Jogos</a>
-  </nav>
-  <div class="logo">
-    <a href="index.html"><img src="logo/LOGO_LABMAP.S.png" alt="Logo LABMAP"></a>
-  </div>
-  <nav class="menu-right">
-    <a href="recursos.html">Recursos</a>
-    <a href="contato.html">Contato</a>
-  </nav>
-</header>
+    <div class="map-point" style="top: 55%; left: 30%;" data-link="jogos.html">
+      <span>Jogos</span>
+    </div>
 
-<main>
-  <div class="sobre">
-    <h1>Bem-vindo ao LABMAP.S</h1>
-    <p>Explorando mapas, materiais educativos e experiências interativas que unem geografia, design e tecnologia.</p>
-  </div>
-</main>
+    <div class="map-point" style="top: 40%; left: 65%;" data-link="recursos.html">
+      <span>Recursos</span>
+    </div>
 
-<footer>
-<div class="footer-content">
-  <div class="footer-logo">
-    <a href="index.html"><img src="logo/LOGO_LABMAP.S.png" alt="Logo LABMAP"></a>
-  </div>
-  <p>© 2025 LABMAP.S. Todos os direitos reservados.</p>
-</div>
-</footer>
+    <div class="map-point" style="top: 65%; left: 50%;" data-link="contato.html">
+      <span>Contato</span>
+    </div>
+  </main>
 
-<script>
-// Canvas para curvas de nível
-const canvas = document.getElementById('fundo-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-// Configuração das linhas de contorno
-const lines = [];
-const numLines = 12;
-const spacing = 40;
-
-for(let i=0;i<numLines;i++){
-  const yOffset = i*spacing + 50;
-  const points = [];
-  const numPoints = 25;
-  for(let j=0;j<numPoints;j++){
-    points.push({x:j*(canvas.width/numPoints), y:yOffset + Math.sin(j/2 + i)*15, vy:Math.random()*0.2-0.1});
-  }
-  lines.push(points);
-}
-
-function drawContours(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle = 'rgba(0,100,200,0.5)';
-  ctx.lineWidth = 2;
-
-  lines.forEach(points=>{
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    for(let i=1;i<points.length;i++){
-      ctx.lineTo(points[i].x, points[i].y);
-      // animação suave
-      points[i].y += points[i].vy;
-      if(points[i].y<0) points[i].y = canvas.height;
-      if(points[i].y>canvas.height) points[i].y = 0;
-    }
-    ctx.stroke();
-  });
-
-  requestAnimationFrame(drawContours);
-}
-drawContours();
-
-window.addEventListener('resize', ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>

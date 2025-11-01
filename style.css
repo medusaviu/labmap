@@ -1,104 +1,93 @@
-/* --- ESTILO GERAL --- */
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+* {
   margin: 0;
   padding: 0;
-  font-family: "Inter", sans-serif;
-  background-color: #f2ede8;
-  color: #222;
-}
-
-/* --- CABEÇALHO --- */
-header {
-  display: flex;
-  align-items: center;
-  padding: 20px 40px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: #f2ede8;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  z-index: 100;
-  gap: 20px;
-}
-
-/* Menus com mesmo tamanho */
-.menu-esquerdo,
-.menu-direito {
-  display: flex;
-  gap: 50px;
-  flex: 1; /* Menus ocupam o mesmo espaço */
-  align-items: center;
-}
-
-.menu-esquerdo {
-  justify-content: flex-end; /* Links encostam na logo pela esquerda */
-}
-
-.menu-direito {
-  justify-content: flex-start; /* Links encostam na logo pela direita */
-}
-
-nav a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 600;
-  font-size: 1.5rem;
-  transition: 0.2s ease;
-  letter-spacing: 0.5px;
-}
-
-nav a:hover {
-  color: #00796b;
-}
-
-/* --- LOGO --- */
-.logo img {
-  height: 75px;
-  cursor: pointer;
-}
-
-/* --- SEÇÃO PRINCIPAL --- */
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 180px 20px 40px;
-  min-height: 100vh;
   box-sizing: border-box;
 }
 
-h1 {
-  font-size: 2.6rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+body {
+  height: 100vh;
+  background: linear-gradient(#a4e1ff, #e5f7ff);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
-p {
-  font-size: 1.3rem;
-  line-height: 1.8;
+/* Logo */
+.logo {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  color: #145c5c;
+  text-shadow: 1px 1px 2px #fff;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+/* Ilha */
+.island-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.island {
+  position: absolute;
+  width: 55%;
+  max-width: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0,0,0,0.2));
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -48%); }
+  50% { transform: translate(-50%, -52%); }
+}
+
+/* Pontos do mapa */
+.map-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+.map-point::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background-color: #ff5e5e;
+  border-radius: 50%;
+  border: 3px solid white;
+  display: block;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+.map-point span {
+  display: none;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
   color: #333;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 900px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 10px;
-  }
+.map-point:hover span {
+  display: block;
+}
 
-  .menu-esquerdo,
-  .menu-direito {
-    flex: unset;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  nav a {
-    font-size: 1.2rem;
-  }
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
 }
