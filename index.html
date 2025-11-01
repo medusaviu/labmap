@@ -17,7 +17,6 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 20px 40px;
       position: fixed;
       width: 100%;
@@ -27,19 +26,23 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       z-index: 100;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
-    /* --- MENUS --- */
+    /* Menus com mesmo tamanho */
     .menu-esquerdo,
     .menu-direito {
       display: flex;
-      align-items: center;
       gap: 50px;
+      flex: 1; /* Menus ocupam o mesmo espaço */
+      justify-content: center;
+    }
+
+    .menu-esquerdo {
+      justify-content: flex-end; /* Links encostam na logo pela esquerda */
     }
 
     .menu-direito {
-      margin-left: auto; /* empurra para a direita */
+      justify-content: flex-start; /* Links encostam na logo pela direita */
     }
 
     nav a {
@@ -94,10 +97,13 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        gap: 10px;
       }
 
       .menu-esquerdo,
       .menu-direito {
+        flex: unset;
+        justify-content: center;
         gap: 20px;
       }
 
