@@ -1,0 +1,104 @@
+/* --- ESTILO GERAL --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f2ede8;
+  color: #222;
+}
+
+/* --- CABEÇALHO --- */
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #f2ede8;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  z-index: 100;
+  gap: 20px;
+}
+
+/* Menus com mesmo tamanho */
+.menu-esquerdo,
+.menu-direito {
+  display: flex;
+  gap: 50px;
+  flex: 1; /* Menus ocupam o mesmo espaço */
+  align-items: center;
+}
+
+.menu-esquerdo {
+  justify-content: flex-end; /* Links encostam na logo pela esquerda */
+}
+
+.menu-direito {
+  justify-content: flex-start; /* Links encostam na logo pela direita */
+}
+
+nav a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+nav a:hover {
+  color: #00796b;
+}
+
+/* --- LOGO --- */
+.logo img {
+  height: 75px;
+  cursor: pointer;
+}
+
+/* --- SEÇÃO PRINCIPAL --- */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 180px 20px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.6rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .menu-esquerdo,
+  .menu-direito {
+    flex: unset;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  nav a {
+    font-size: 1.2rem;
+  }
+}
