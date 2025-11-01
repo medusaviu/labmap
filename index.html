@@ -29,10 +29,17 @@
       z-index: 100;
     }
 
-    nav {
+    /* --- MENUS --- */
+    .menu-esquerdo,
+    .menu-direito {
       display: flex;
       align-items: center;
       gap: 60px;
+      flex: 1; /* Garante que os menus ocupem espaço suficiente */
+    }
+
+    .menu-direito {
+      justify-content: flex-end;
     }
 
     nav a {
@@ -53,6 +60,7 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 101; /* Fica acima do header para não sobrepor menus */
     }
 
     .logo img {
@@ -95,14 +103,17 @@
         padding: 20px;
       }
 
+      .menu-esquerdo,
+      .menu-direito {
+        gap: 30px;
+        flex: unset;
+        justify-content: center;
+      }
+
       .logo {
         position: relative;
         left: 0;
         transform: none;
-      }
-
-      nav {
-        gap: 30px;
       }
 
       nav a {
