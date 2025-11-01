@@ -1,34 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Labmap</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LABMAP</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="logo">
-    <h1>LABMAP</h1>
+  <header class="topbar">
+    <h1 class="brand">LABMAP</h1>
   </header>
 
-  <main class="island-container">
-    <img src="https://i.imgur.com/TYmlVHw.png" alt="Ilha" class="island" />
-    
-    <div class="map-point" style="top: 35%; left: 45%;" data-link="projetos.html">
-      <span>Projetos</span>
+  <main class="viewport">
+    <div class="scene">
+      <!-- SVG da ilha (cartoon / vetorial) -->
+      <svg id="island-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" aria-labelledby="islandTitle islandDesc" role="img">
+        <title id="islandTitle">Ilha Labmap</title>
+        <desc id="islandDesc">Ilustração estilizada de uma ilha com pinos para navegar para Projetos, Jogos, Recursos e Contato.</desc>
+
+        <!-- Céu / Mar -->
+        <defs>
+          <linearGradient id="seaGrad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#8ed0ff" />
+            <stop offset="1" stop-color="#60b3e6" />
+          </linearGradient>
+
+          <linearGradient id="landGrad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#fef3c7" />
+            <stop offset="1" stop-color="#d8f3b7" />
+          </linearGradient>
+
+          <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity="0.15"/>
+          </filter>
+
+          <filter id="pinGlow">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+
+        </defs>
+
+        <!-- Mar -->
+        <rect width="1200" height="800" fill="url(#seaGrad)"></rect>
+
+        <!-- Sombra da ilha -->
+        <ellipse cx="600" cy="520" rx="380" ry="70" fill="#0b2a3a" opacity="0.12" />
+
+        <!-- Ilha (base) -->
+        <g id="island" transform="translate(120,70)">
+          <path d="M260 30 C 100 40 8 210 30 330 C 60 470 230 520 360 510 C 520 500 680 490 780 380 C 860 290 820 150 700 90 C 600 40 420 20 260 30 Z"
+                fill="url(#landGrad)" stroke="#c2a86b" stroke-width="6" filter="url(#softShadow)"/>
+          <!-- praias -->
+          <path d="M270 70 C 180 90 120 180 140 260 C 160 330 260 360 340 355 C 420 350 480 340 560 320 C 620 305 660 270 700 230 C 740 190 760 120 700 90 C 640 60 540 50 460 55 C 380 60 320 68 270 70 Z"
+                fill="#fff2cd" opacity="0.9" />
+
+          <!-- detalhes: árvores, montanha, casas, trilhas -->
+          <!-- Montanha -->
+          <path d="M480 130 L540 30 L600 130 Z" fill="#9bbf7f" stroke="#6f8a5a" stroke-width="4" />
+          <path d="M512 115 L540 49 L572 115 Z" fill="#ddecbe" opacity="0.8" />
+
+          <!-- Árvores (grupo) -->
+          <g id="trees" transform="translate(120,200)">
+            <g class="tree" transform="translate(0,0)">
+              <ellipse cx="20" cy="0" rx="18" ry="24" fill="#2f8e4f" />
+              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
+            </g>
+            <g class="tree" transform="translate(80,30)">
+              <ellipse cx="20" cy="0" rx="22" ry="28" fill="#2f8e4f" />
+              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
+            </g>
+            <g class="tree" transform="translate(280,40)">
+              <ellipse cx="20" cy="0" rx="20" ry="26" fill="#2f8e4f" />
+              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
+            </g>
+          </g>
+
+          <!-- Casas -->
+          <g transform="translate(420,270)">
+            <rect x="0" y="10" width="60" height="38" rx="6" fill="#ffd2a6" stroke="#b8754e" />
+            <polygon points="-4,10 30,-12 64,10" fill="#e07a5f" stroke="#b14f3c" />
+          </g>
+
+          <g transform="translate(560,300)">
+            <rect x="0" y="10" width="40" height="30" rx="6" fill="#cfe8ff" stroke="#6fa3d6" />
+            <polygon points="-4,10 20,-10 44,10" fill="#6fa3d6" stroke="#5b87b0" />
+          </g>
+
+          <!-- Trilhas sinuosas (animação possível com stroke-dashoffset) -->
+          <path class="trail" d="M160 220 C 200 200 260 190 320 210 C 380 230 420 240 460 260" fill="none" stroke="#caa76c" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.9"/>
+
+        </g>
+
+        <!-- Pinos interativos (posicionados com coordenadas do viewBox) -->
+        <!-- cada pino tem data-link para onde navegar -->
+        <g id="pins">
+          <!-- Projetos -->
+          <g class="pin" transform="translate(430,320)" data-link="projetos.html" tabindex="0" role="link" aria-label="Projetos">
+            <circle class="pin-shadow" cx="0" cy="22" r="12" fill="#000" opacity="0.12" />
+            <g class="pin-head" transform="translate(0,0)">
+              <circle cx="0" cy="0" r="16" fill="#ff5e5e" stroke="#fff" stroke-width="4" filter="url(#pinGlow)"/>
+              <circle cx="0" cy="-2" r="6" fill="#fff" opacity="0.85"/>
+            </g>
+            <text x="0" y="-30" text-anchor="middle" class="pin-label">Projetos</text>
+          </g>
+
+          <!-- Jogos -->
+          <g class="pin" transform="translate(350,420)" data-link="jogos.html" tabindex="0" role="link" aria-label="Jogos">
+            <circle class="pin-shadow" cx="0" cy="22" r="12" fill="#000" opacity="0.12" />
+            <g class="pin-head" transform="translate(0,0)">
+              <circle cx="0" cy="0" r="16" fill="#ffb85c" stroke="#fff" stroke-width="4" filter="url(#pinGlow)"/>
+              <circle cx="0" cy="-2" r="6" fill="#fff" opacity="0.85"/>
+            </g>
+            <text x="0" y="-30" text-anchor="middle" class="pin-label">Jogos</text>
+          </g>
+
+          <!-- Recursos -->
+          <g class="pin" transform="translate(620,300)" data-link="recursos.html" tabindex="0" role="link" aria-label="Recursos">
+            <circle class="pin-shadow" cx="0" cy="22" r="12" fill="#000" opacity="0.12" />
+            <g class="pin-head" transform="translate(0,0)">
+              <circle cx="0" cy="0" r="16" fill="#6ec6a2" stroke="#fff" stroke-width="4" filter="url(#pinGlow)"/>
+              <circle cx="0" cy="-2" r="6" fill="#fff" opacity="0.85"/>
+            </g>
+            <text x="0" y="-30" text-anchor="middle" class="pin-label">Recursos</text>
+          </g>
+
+          <!-- Contato -->
+          <g class="pin" transform="translate(560,430)" data-link="contato.html" tabindex="0" role="link" aria-label="Contato">
+            <circle class="pin-shadow" cx="0" cy="22" r="12" fill="#000" opacity="0.12" />
+            <g class="pin-head" transform="translate(0,0)">
+              <circle cx="0" cy="0" r="16" fill="#7aa6ff" stroke="#fff" stroke-width="4" filter="url(#pinGlow)"/>
+              <circle cx="0" cy="-2" r="6" fill="#fff" opacity="0.85"/>
+            </g>
+            <text x="0" y="-30" text-anchor="middle" class="pin-label">Contato</text>
+          </g>
+        </g>
+
+      </svg>
     </div>
 
-    <div class="map-point" style="top: 55%; left: 30%;" data-link="jogos.html">
-      <span>Jogos</span>
-    </div>
-
-    <div class="map-point" style="top: 40%; left: 65%;" data-link="recursos.html">
-      <span>Recursos</span>
-    </div>
-
-    <div class="map-point" style="top: 65%; left: 50%;" data-link="contato.html">
-      <span>Contato</span>
-    </div>
+    <!-- Footer pequeno com instrução -->
+    <aside class="note">Clique nos pontos da ilha para navegar →</aside>
   </main>
 
   <script src="script.js"></script>

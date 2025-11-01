@@ -1,93 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --bg0: #e6f7ff;
+  --accent: #145c5c;
+  --max-width: 1100px;
 }
 
-body {
-  height: 100vh;
-  background: linear-gradient(#a4e1ff, #e5f7ff);
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(#bfefff, #e6f7ff);
+  color:#153e44;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-height:100vh;
+  padding:20px;
 }
 
-/* Logo */
-.logo {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  color: #145c5c;
-  text-shadow: 1px 1px 2px #fff;
-  font-size: 2rem;
-  letter-spacing: 2px;
+/* Topbar / Logo */
+.topbar{
+  width:100%;
+  max-width:var(--max-width);
+  margin: 6px 0 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.brand{
+  font-weight:700;
+  letter-spacing:6px;
+  color:var(--accent);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  margin:0;
+  font-size:28px;
 }
 
-/* Ilha */
-.island-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* Scene container centra o SVG */
+.viewport{
+  width:100%;
+  max-width:1200px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
 }
 
-.island {
-  position: absolute;
-  width: 55%;
-  max-width: 600px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(0,0,0,0.2));
+.scene{
+  width:100%;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding: 8px;
+  border-radius:18px;
+  box-shadow: 0 10px 30px rgba(12, 45, 55, 0.08);
 }
 
-@keyframes float {
-  0%, 100% { transform: translate(-50%, -48%); }
-  50% { transform: translate(-50%, -52%); }
+/* Responsividade SVG */
+#island-svg{
+  width:100%;
+  height:auto;
+  max-height:72vh;
+  display:block;
+  transform-origin:center;
+  animation: islandFloat 6s ease-in-out infinite;
 }
 
-/* Pontos do mapa */
-.map-point {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  animation: pulse 2s infinite;
+/* animação leve de flutuação */
+@keyframes islandFloat{
+  0%,100%{ transform: translateY(0px) }
+  50%{ transform: translateY(-6px) }
 }
 
-.map-point::before {
-  content: "";
-  width: 18px;
-  height: 18px;
-  background-color: #ff5e5e;
-  border-radius: 50%;
-  border: 3px solid white;
-  display: block;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+/* Pins styling - target elements inside the svg */
+.pin{ cursor:pointer; transition: transform 180ms ease, filter 180ms ease; }
+.pin:focus { outline: none; transform: translateY(-6px) scale(1.03); }
+.pin:hover .pin-head { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 8px 14px rgba(0,0,0,0.12)); }
+.pin-head { transition: transform 220ms cubic-bezier(.2,.9,.2,1); transform-origin:center; }
+
+.pin-label{
+  font-family: "Inter", sans-serif;
+  font-size:16px;
+  fill:#fff;
+  stroke: rgba(0,0,0,0.18);
+  stroke-width: 2px;
+  paint-order: stroke fill;
+  pointer-events:none;
+  font-weight:600;
+  opacity:0;
+  transition: opacity 180ms;
 }
 
-.map-point span {
-  display: none;
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  color: #333;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  white-space: nowrap;
+/* mostrar label ao hover via CSS usando pointer-events of parent (SVG) */
+.pin:hover .pin-label, .pin:focus .pin-label { opacity:1; }
+
+/* pulse — animação sutil nos círculos para chamar atenção */
+@keyframes pinPulse {
+  0%{ transform: scale(1); opacity:1 }
+  60%{ transform: scale(1.22); opacity:0.35 }
+  100%{ transform: scale(1); opacity:1 }
 }
 
-.map-point:hover span {
-  display: block;
+.pin-head circle:first-child { animation: pinPulse 2.4s infinite ease-in-out; transform-origin:center; }
+
+/* pequenas sombras e responsividade */
+.scene::after{
+  content:"";
+  position:absolute;
+  left:50%; bottom:-12px;
+  width:60%;
+  height:60px;
+  transform:translateX(-50%);
+  filter: blur(20px);
+  opacity:0.08;
 }
 
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.2); }
-  100% { transform: translate(-50%, -50%) scale(1); }
+/* Nota */
+.note{
+  font-size:14px;
+  color:#134046;
+  opacity:0.9;
+  margin-top:6px;
+}
+
+/* pequenos ajustes para telas menores */
+@media (max-width:720px){
+  .brand{ font-size:20px; letter-spacing:4px }
+  .note{ font-size:13px }
+  .pin-label{ font-size:12px }
 }
