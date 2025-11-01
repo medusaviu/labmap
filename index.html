@@ -23,23 +23,29 @@ header{
   box-shadow:0 2px 5px rgba(0,0,0,0.05);
   z-index:100;
 }
-.menu-right{
+.menu-left, .menu-right{
   display:flex;
   gap:40px;
+  flex:1;
 }
-.menu-right a{
+.menu-left{
+  justify-content: flex-end;
+}
+.menu-right{
+  justify-content: flex-start;
+}
+.menu-left a, .menu-right a{
   text-decoration:none;
   color:#222;
   font-weight:600;
   font-size:1.3rem;
 }
-.menu-right a:hover{
+.menu-left a:hover, .menu-right a:hover{
   color:#00796b;
 }
 .logo{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink:0;
+  margin:0 40px;
 }
 .logo img{
   height:60px;
@@ -94,14 +100,12 @@ footer p{font-size:0.9rem;color:#555;margin:0;}
     gap:15px; 
     padding:20px;
   }
-  .menu-right{
+  .menu-left, .menu-right{
     justify-content:center; 
     gap:20px;
   }
   .logo{
-    position: static;
-    transform: none;
-    order: -1;
+    margin:10px 0;
   }
   .logo img{
     height:50px;
@@ -120,12 +124,14 @@ footer p{font-size:0.9rem;color:#555;margin:0;}
 <canvas id="fundo-canvas"></canvas>
 
 <header>
+  <nav class="menu-left">
+    <a href="projetos.html">Projetos</a>
+    <a href="jogos.html">Jogos</a>
+  </nav>
   <div class="logo">
     <a href="index.html"><img src="logo/LOGO_LABMAP.S.png" alt="Logo LABMAP"></a>
   </div>
   <nav class="menu-right">
-    <a href="projetos.html">Projetos</a>
-    <a href="jogos.html">Jogos</a>
     <a href="recursos.html">Recursos</a>
     <a href="contato.html">Contato</a>
   </nav>
