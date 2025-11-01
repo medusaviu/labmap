@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LABMAP.S</title>
   <style>
-    /* --- ESTILO GERAL --- */
     body {
       margin: 0;
       padding: 0;
@@ -17,9 +16,9 @@
     /* --- CABEÇALHO --- */
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 28px 80px;
+      justify-content: space-between;
+      padding: 20px 40px;
       position: fixed;
       width: 100%;
       top: 0;
@@ -27,6 +26,8 @@
       background-color: #f2ede8;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       z-index: 100;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     /* --- MENUS --- */
@@ -34,12 +35,11 @@
     .menu-direito {
       display: flex;
       align-items: center;
-      gap: 60px;
-      flex: 1; /* Garante que os menus ocupem espaço suficiente */
+      gap: 50px;
     }
 
     .menu-direito {
-      justify-content: flex-end;
+      margin-left: auto; /* empurra para a direita */
     }
 
     nav a {
@@ -56,19 +56,12 @@
     }
 
     /* --- LOGO --- */
-    .logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 101; /* Fica acima do header para não sobrepor menus */
-    }
-
     .logo img {
       height: 75px;
       cursor: pointer;
     }
 
-    /* --- SEÇÃO SOBRE (PÁGINA INICIAL) --- */
+    /* --- SEÇÃO SOBRE --- */
     main {
       display: flex;
       justify-content: center;
@@ -99,25 +92,17 @@
     @media (max-width: 900px) {
       header {
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
         padding: 20px;
       }
 
       .menu-esquerdo,
       .menu-direito {
-        gap: 30px;
-        flex: unset;
-        justify-content: center;
-      }
-
-      .logo {
-        position: relative;
-        left: 0;
-        transform: none;
+        gap: 20px;
       }
 
       nav a {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
 
       main {
