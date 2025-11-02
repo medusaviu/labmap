@@ -1,9 +1,9 @@
+/* style.css - estilo geral do Labmap */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root{
-  --bg0: #e6f7ff;
   --accent: #145c5c;
-  --max-width: 1100px;
+  --max-width: 1200px;
 }
 
 *{box-sizing:border-box}
@@ -12,13 +12,12 @@ body{
   margin:0;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: linear-gradient(#bfefff, #e6f7ff);
-  color:#153e44;
+  color:#123c3f;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:flex-start;
   min-height:100vh;
   padding:20px;
 }
@@ -41,7 +40,7 @@ body{
   font-size:28px;
 }
 
-/* Scene container centra o SVG */
+/* Scene container */
 .viewport{
   width:100%;
   max-width:1200px;
@@ -58,12 +57,12 @@ body{
   align-items:center;
   justify-content:center;
   position:relative;
-  padding: 8px;
+  padding:8px;
   border-radius:18px;
   box-shadow: 0 10px 30px rgba(12, 45, 55, 0.08);
 }
 
-/* Responsividade SVG */
+/* SVG responsivo */
 #island-svg{
   width:100%;
   height:auto;
@@ -73,64 +72,52 @@ body{
   animation: islandFloat 6s ease-in-out infinite;
 }
 
-/* animação leve de flutuação */
+/* leve flutuação */
 @keyframes islandFloat{
   0%,100%{ transform: translateY(0px) }
   50%{ transform: translateY(-6px) }
 }
 
-/* Pins styling - target elements inside the svg */
+/* pins (dentro do SVG) */
 .pin{ cursor:pointer; transition: transform 180ms ease, filter 180ms ease; }
 .pin:focus { outline: none; transform: translateY(-6px) scale(1.03); }
-.pin:hover .pin-head { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 8px 14px rgba(0,0,0,0.12)); }
-.pin-head { transition: transform 220ms cubic-bezier(.2,.9,.2,1); transform-origin:center; }
+.pin .pin-head { transition: transform 220ms cubic-bezier(.2,.9,.2,1); transform-origin:center; }
+.pin:hover .pin-head, .pin:focus .pin-head { transform: translateY(-6px) scale(1.06); filter: drop-shadow(0 8px 14px rgba(0,0,0,0.12)); }
 
+/* label dos pins */
 .pin-label{
   font-family: "Inter", sans-serif;
   font-size:16px;
-  fill:#fff;
-  stroke: rgba(0,0,0,0.18);
-  stroke-width: 2px;
-  paint-order: stroke fill;
-  pointer-events:none;
+  fill:#123c3f;
   font-weight:600;
+  pointer-events:none;
   opacity:0;
-  transition: opacity 180ms;
+  transform-origin:center;
+  transition: opacity 160ms ease, transform 160ms ease;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
+.pin:hover .pin-label, .pin:focus .pin-label { opacity:1; transform: translateY(-4px); }
 
-/* mostrar label ao hover via CSS usando pointer-events of parent (SVG) */
-.pin:hover .pin-label, .pin:focus .pin-label { opacity:1; }
-
-/* pulse — animação sutil nos círculos para chamar atenção */
+/* animação de pulso nos pins */
 @keyframes pinPulse {
   0%{ transform: scale(1); opacity:1 }
-  60%{ transform: scale(1.22); opacity:0.35 }
+  60%{ transform: scale(1.22); opacity:0.4 }
   100%{ transform: scale(1); opacity:1 }
 }
+.pin .pin-head path:first-child { animation: pinPulse 2.6s infinite ease-in-out; transform-origin:center; }
 
-.pin-head circle:first-child { animation: pinPulse 2.4s infinite ease-in-out; transform-origin:center; }
+/* trilha animada via JS (apenas estilo) */
+.trail { stroke-linecap: round; }
 
-/* pequenas sombras e responsividade */
-.scene::after{
-  content:"";
-  position:absolute;
-  left:50%; bottom:-12px;
-  width:60%;
-  height:60px;
-  transform:translateX(-50%);
-  filter: blur(20px);
-  opacity:0.08;
-}
-
-/* Nota */
+/* nota abaixo do mapa */
 .note{
   font-size:14px;
   color:#134046;
-  opacity:0.9;
+  opacity:0.95;
   margin-top:6px;
 }
 
-/* pequenos ajustes para telas menores */
+/* responsividade */
 @media (max-width:720px){
   .brand{ font-size:20px; letter-spacing:4px }
   .note{ font-size:13px }
