@@ -1,143 +1,129 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LABMAP</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labmap.s</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f2ede8;
+            color: #333;
+        }
+
+        /* Cabeçalho */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: relative;
+        }
+
+        /* Menus */
+        nav.left, nav.right {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #7d5a50; /* Tom mais quente para hover */
+        }
+
+        /* Logo central */
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 50px; /* Ajuste conforme a sua imagem */
+        }
+
+        /* Conteúdo principal */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 50px 20px;
+            text-align: center;
+        }
+
+        main h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav.left, nav.right {
+                margin: 10px 0;
+            }
+
+            .logo {
+                position: static;
+                transform: none;
+                margin: 10px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <h1 class="brand">LABMAP</h1>
-  </header>
+    <header>
+        <!-- Menu esquerdo -->
+        <nav class="left">
+            <a href="#projetos">Projetos</a>
+            <a href="#jogos">Jogos</a>
+        </nav>
 
-  <main class="viewport">
-    <div class="scene">
-      <!-- SVG mapa-cartoon sem sol -->
-      <svg id="island-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
-        <title id="title">Mapa Labmap</title>
-        <desc id="desc">Ilustração de ilha/cartografia colorida com pontos de navegação para Projetos, Jogos, Recursos e Contato.</desc>
+        <!-- Logo central -->
+        <a href="index.html">
+            <img src="logo/LOGO_LABMAP.S.png" alt="LABMAP" class="logo">
+        </a>
 
-        <!-- fundo mar -->
-        <defs>
-          <linearGradient id="seaGrad" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="#9fe3ff"/>
-            <stop offset="1" stop-color="#6ebfe6"/>
-          </linearGradient>
+        <!-- Menu direito -->
+        <nav class="right">
+            <a href="#recursos">Recursos</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
 
-          <linearGradient id="landGrad" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="#fef3c7"/>
-            <stop offset="1" stop-color="#d7f1b5"/>
-          </linearGradient>
-
-          <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000" flood-opacity="0.12" />
-          </filter>
-
-          <filter id="pinGlow">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        <!-- mar -->
-        <rect width="1200" height="800" fill="url(#seaGrad)"></rect>
-
-        <!-- sombra central -->
-        <ellipse cx="600" cy="540" rx="420" ry="80" fill="#08303b" opacity="0.08"/>
-
-        <!-- ilha -->
-        <g id="island" transform="translate(120,70)">
-          <path d="M260 30 C 100 40 8 210 30 330 C 60 470 230 520 360 510 C 520 500 680 490 780 380 C 860 290 820 150 700 90 C 600 40 420 20 260 30 Z"
-                fill="url(#landGrad)" stroke="#d4b36a" stroke-width="6" filter="url(#softShadow)"/>
-          <path d="M270 70 C 180 90 120 180 140 260 C 160 330 260 360 340 355 C 420 350 480 340 560 320 C 620 305 660 270 700 230 C 740 190 760 120 700 90 C 640 60 540 50 460 55 C 380 60 320 68 270 70 Z"
-                fill="#fff7d3" opacity="0.95"/>
-
-          <!-- montanhas -->
-          <path d="M480 130 L540 30 L600 130 Z" fill="#9ec07d" stroke="#6f8a5a" stroke-width="4"/>
-          <path d="M512 115 L540 49 L572 115 Z" fill="#e6f2cc" opacity="0.9"/>
-
-          <!-- árvores -->
-          <g transform="translate(120,200)">
-            <g transform="translate(0,0)">
-              <ellipse cx="20" cy="0" rx="18" ry="24" fill="#2f8e4f" />
-              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
-            </g>
-            <g transform="translate(80,30)">
-              <ellipse cx="20" cy="0" rx="22" ry="28" fill="#2f8e4f" />
-              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
-            </g>
-            <g transform="translate(280,40)">
-              <ellipse cx="20" cy="0" rx="20" ry="26" fill="#2f8e4f" />
-              <rect x="14" y="0" width="12" height="18" rx="3" fill="#7a4a2a" />
-            </g>
-          </g>
-
-          <!-- casas -->
-          <g transform="translate(420,270)">
-            <rect x="0" y="10" width="60" height="38" rx="6" fill="#ffd2a6" stroke="#b8754e" />
-            <polygon points="-4,10 30,-12 64,10" fill="#e07a5f" stroke="#b14f3c" />
-          </g>
-          <g transform="translate(560,300)">
-            <rect x="0" y="10" width="40" height="30" rx="6" fill="#cfe8ff" stroke="#6fa3d6" />
-            <polygon points="-4,10 20,-10 44,10" fill="#6fa3d6" stroke="#5b87b0" />
-          </g>
-
-          <!-- trilhas (linha pontilhada) -->
-          <path class="trail" d="M160 220 C 200 200 260 190 320 210 C 380 230 420 240 460 260" fill="none" stroke="#caa76c" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.9"/>
-        </g>
-
-        <!-- pinos / marcadores -->
-        <g id="pins">
-          <!-- Projetos -->
-          <g class="pin" transform="translate(430,320)" data-link="projetos.html" tabindex="0" role="link" aria-label="Projetos">
-            <ellipse cx="0" cy="24" rx="12" ry="7" fill="#000" opacity="0.12"/>
-            <g class="pin-head">
-              <path d="M0 -18 C8 -18 10 -8 10 0 C10 10 0 28 0 28 C0 28 -10 10 -10 0 C-10 -8 -8 -18 0 -18 Z" fill="#ff5e5e" stroke="#fff" stroke-width="3"/>
-              <circle cx="0" cy="-6" r="5" fill="#fff" opacity="0.9"/>
-            </g>
-            <text x="0" y="-36" text-anchor="middle" class="pin-label">Projetos</text>
-          </g>
-
-          <!-- Jogos -->
-          <g class="pin" transform="translate(350,420)" data-link="jogos.html" tabindex="0" role="link" aria-label="Jogos">
-            <ellipse cx="0" cy="24" rx="12" ry="7" fill="#000" opacity="0.12"/>
-            <g class="pin-head">
-              <path d="M0 -18 C8 -18 10 -8 10 0 C10 10 0 28 0 28 C0 28 -10 10 -10 0 C-10 -8 -8 -18 0 -18 Z" fill="#ffb85c" stroke="#fff" stroke-width="3"/>
-              <circle cx="0" cy="-6" r="5" fill="#fff" opacity="0.9"/>
-            </g>
-            <text x="0" y="-36" text-anchor="middle" class="pin-label">Jogos</text>
-          </g>
-
-          <!-- Recursos -->
-          <g class="pin" transform="translate(620,300)" data-link="recursos.html" tabindex="0" role="link" aria-label="Recursos">
-            <ellipse cx="0" cy="24" rx="12" ry="7" fill="#000" opacity="0.12"/>
-            <g class="pin-head">
-              <path d="M0 -18 C8 -18 10 -8 10 0 C10 10 0 28 0 28 C0 28 -10 10 -10 0 C-10 -8 -8 -18 0 -18 Z" fill="#6ec6a2" stroke="#fff" stroke-width="3"/>
-              <circle cx="0" cy="-6" r="5" fill="#fff" opacity="0.9"/>
-            </g>
-            <text x="0" y="-36" text-anchor="middle" class="pin-label">Recursos</text>
-          </g>
-
-          <!-- Contato -->
-          <g class="pin" transform="translate(560,430)" data-link="contato.html" tabindex="0" role="link" aria-label="Contato">
-            <ellipse cx="0" cy="24" rx="12" ry="7" fill="#000" opacity="0.12"/>
-            <g class="pin-head">
-              <path d="M0 -18 C8 -18 10 -8 10 0 C10 10 0 28 0 28 C0 28 -10 10 -10 0 C-10 -8 -8 -18 0 -18 Z" fill="#7aa6ff" stroke="#fff" stroke-width="3"/>
-              <circle cx="0" cy="-6" r="5" fill="#fff" opacity="0.9"/>
-            </g>
-            <text x="0" y="-36" text-anchor="middle" class="pin-label">Contato</text>
-          </g>
-        </g>
-      </svg>
-    </div>
-
-    <aside class="note">Clique nos pontos da ilha para navegar →</aside>
-  </main>
-
-  <script src="script.js"></script>
+    <main>
+        <h1>Bem-vindo ao Labmap.s</h1>
+        <p>
+            O Labmap.s é um espaço dedicado à educação geográfica e cartográfica, 
+            reunindo projetos, jogos educativos e recursos interativos. 
+            Nosso objetivo é transformar o aprendizado em uma experiência dinâmica, 
+            moderna e acessível para professores e estudantes. Explore nosso conteúdo, 
+            descubra novas possibilidades de ensino e conecte-se com o universo da cartografia.
+        </p>
+    </main>
 </body>
 </html>
