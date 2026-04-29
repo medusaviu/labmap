@@ -2,10 +2,15 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Labmap.s — Em breve</title>
 
 <style>
+
+:root{
+--bg:#F3F1EC;      /* fundo da logo */
+--blue:#2F55C7;
+}
 
 *{
 margin:0;
@@ -14,65 +19,62 @@ box-sizing:border-box;
 }
 
 body{
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#F2F0EC;
+background:var(--bg);
 font-family:"Courier New", monospace;
-color:#2F55C7;
+color:var(--blue);
 overflow:hidden;
+padding:30px 20px;
 }
 
-/* detalhes cartográficos */
-body::before{
-content:"";
-position:absolute;
-top:40px;
-left:40px;
-width:180px;
-height:180px;
-border-left:1px solid #2F55C7;
-border-radius:50%;
-opacity:.30;
+/* detalhes decorativos */
+.topo-left{
+position:fixed;
+left:4vw;
+top:5vh;
+opacity:.35;
+font-size:4rem;
 }
 
-body::after{
-content:"✦";
-position:absolute;
-top:90px;
-right:120px;
-font-size:55px;
-opacity:.7;
+.topo-right{
+position:fixed;
+right:6vw;
+top:7vh;
+font-size:3rem;
+opacity:.65;
 }
 
 .container{
-max-width:900px;
+width:min(90vw,800px);
 text-align:center;
-padding:50px;
-position:relative;
-z-index:2;
 }
 
+/* LOGO */
 .logo{
-width:400px;
-max-width:80%;
-margin-bottom:45px;
+width:min(38vw,280px);
+min-width:180px;
+display:block;
+margin:0 auto 40px;
 }
 
+/* título */
 h1{
-font-size:30px;
 font-weight:400;
-letter-spacing:3px;
-margin-bottom:28px;
+font-size:clamp(1.15rem,2vw,1.8rem);
+letter-spacing:.18em;
+line-height:1.6;
+margin-bottom:30px;
 }
 
+/* divisor */
 .divisor{
-width:420px;
-max-width:80%;
+width:min(380px,70%);
 height:1px;
-background:#2F55C7;
-margin:30px auto 42px;
+background:var(--blue);
+margin:0 auto 42px;
 position:relative;
 }
 
@@ -80,60 +82,91 @@ position:relative;
 content:"✦";
 position:absolute;
 left:50%;
+top:-13px;
 transform:translateX(-50%);
-top:-14px;
-background:#F2F0EC;
-padding:0 14px;
+background:var(--bg);
+padding:0 12px;
 }
 
+/* texto */
 p{
-font-size:20px;
-line-height:1.9;
-max-width:700px;
+max-width:620px;
 margin:auto;
+font-size:clamp(1rem,1.5vw,1.35rem);
+line-height:1.9;
 }
 
+/* botão */
 .botao{
 display:inline-block;
-margin-top:50px;
-padding:16px 36px;
-border:1.5px solid #2F55C7;
+margin-top:48px;
+padding:15px 34px;
+border:1.4px solid var(--blue);
 border-radius:60px;
 text-decoration:none;
-color:#2F55C7;
-font-size:19px;
+color:var(--blue);
+font-size:clamp(.95rem,1.3vw,1.1rem);
 transition:.3s;
 }
 
 .botao:hover{
-background:#2F55C7;
-color:#F2F0EC;
+background:var(--blue);
+color:var(--bg);
 }
 
 .rodape{
-margin-top:55px;
-font-size:18px;
-letter-spacing:4px;
+margin-top:50px;
+font-size:clamp(.85rem,1vw,1rem);
+letter-spacing:.3em;
 }
 
-/* responsivo */
-@media(max-width:768px){
+/* MOBILE */
+@media (max-width:768px){
+
+body{
+padding:40px 22px;
+}
 
 .logo{
-width:280px;
+width:220px;
+margin-bottom:32px;
+}
+
+.topo-left{
+font-size:2.6rem;
+left:18px;
+top:30px;
+}
+
+.topo-right{
+font-size:2rem;
+right:24px;
+top:35px;
 }
 
 h1{
-font-size:22px;
+letter-spacing:.12em;
+line-height:1.7;
+margin-bottom:24px;
+}
+
+.divisor{
+margin-bottom:34px;
 }
 
 p{
-font-size:17px;
+font-size:1rem;
+line-height:1.8;
 }
 
 .botao{
-font-size:16px;
+margin-top:38px;
 padding:14px 28px;
+}
+
+.rodape{
+margin-top:38px;
+letter-spacing:.2em;
 }
 
 }
@@ -142,9 +175,12 @@ padding:14px 28px;
 </head>
 <body>
 
+<div class="topo-left">⌇</div>
+<div class="topo-right">✦</div>
+
 <div class="container">
 
-<img src="logo/LOGO_LABMAP.S.webp" alt="Labmap.s" class="logo">
+<img src="logo/labmap.png" alt="Labmap.s" class="logo">
 
 <h1>✦ EM BREVE, NOSSO SITE ESTARÁ NO AR ✦</h1>
 
@@ -156,8 +192,8 @@ Em breve o site estará no ar com projetos,<br>
 materiais educativos e mapeamentos.
 </p>
 
-<a 
-href="https://instagram.com/labmap.s" 
+<a
+href="https://instagram.com/labmap.s"
 target="_blank"
 class="botao">
 Acompanhe no Instagram
