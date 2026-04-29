@@ -1,13 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Labmap.s — Em breve</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#F2F0EC;
+font-family:"Courier New", monospace;
+color:#2F55C7;
+overflow:hidden;
+}
+
+/* detalhes cartográficos */
+body::before{
+content:"";
+position:absolute;
+top:40px;
+left:40px;
+width:180px;
+height:180px;
+border-left:1px solid #2F55C7;
+border-radius:50%;
+opacity:.30;
+}
+
+body::after{
+content:"✦";
+position:absolute;
+top:90px;
+right:120px;
+font-size:55px;
+opacity:.7;
+}
+
+.container{
+max-width:900px;
+text-align:center;
+padding:50px;
+position:relative;
+z-index:2;
+}
+
+.logo{
+width:400px;
+max-width:80%;
+margin-bottom:45px;
+}
+
 h1{
-font-size:34px;
-letter-spacing:3px;
+font-size:30px;
 font-weight:400;
-margin-bottom:30px;
+letter-spacing:3px;
+margin-bottom:28px;
+}
+
+.divisor{
+width:420px;
+max-width:80%;
+height:1px;
+background:#2F55C7;
+margin:30px auto 42px;
+position:relative;
+}
+
+.divisor::after{
+content:"✦";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+top:-14px;
+background:#F2F0EC;
+padding:0 14px;
 }
 
 p{
-font-size:23px;
-line-height:1.8;
+font-size:20px;
+line-height:1.9;
 max-width:700px;
 margin:auto;
 }
@@ -20,7 +101,13 @@ border:1.5px solid #2F55C7;
 border-radius:60px;
 text-decoration:none;
 color:#2F55C7;
-font-size:22px;
+font-size:19px;
+transition:.3s;
+}
+
+.botao:hover{
+background:#2F55C7;
+color:#F2F0EC;
 }
 
 .rodape{
@@ -28,3 +115,59 @@ margin-top:55px;
 font-size:18px;
 letter-spacing:4px;
 }
+
+/* responsivo */
+@media(max-width:768px){
+
+.logo{
+width:280px;
+}
+
+h1{
+font-size:22px;
+}
+
+p{
+font-size:17px;
+}
+
+.botao{
+font-size:16px;
+padding:14px 28px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<img src="logo/labmap.png" alt="Labmap.s" class="logo">
+
+<h1>✦ EM BREVE, NOSSO SITE ESTARÁ NO AR ✦</h1>
+
+<div class="divisor"></div>
+
+<p>
+Estamos cartografando este espaço.<br>
+Em breve o site estará no ar com projetos,<br>
+materiais educativos e mapeamentos.
+</p>
+
+<a 
+href="https://instagram.com/labmap.s" 
+target="_blank"
+class="botao">
+Acompanhe no Instagram
+</a>
+
+<div class="rodape">
+✦ EM BREVE NO AR ✦
+</div>
+
+</div>
+
+</body>
+</html>
