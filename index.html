@@ -8,7 +8,7 @@
 <style>
 
 :root{
---bg:#F3F1EC;      /* fundo da logo */
+--bg:#f0ede9;
 --blue:#2F55C7;
 }
 
@@ -19,70 +19,109 @@ box-sizing:border-box;
 }
 
 body{
+background:var(--bg);
+color:var(--blue);
+font-family:"Courier New", monospace;
 min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:var(--bg);
-font-family:"Courier New", monospace;
-color:var(--blue);
+padding:40px 20px;
 overflow:hidden;
-padding:30px 20px;
+position:relative;
 }
 
-/* detalhes decorativos */
-.topo-left{
+/* curvas topográficas */
+.topografia1,
+.topografia2{
 position:fixed;
-left:4vw;
-top:5vh;
-opacity:.35;
-font-size:4rem;
+border:1px solid rgba(47,85,199,.25);
+border-radius:50%;
+pointer-events:none;
 }
 
-.topo-right{
+.topografia1{
+width:420px;
+height:260px;
+top:-70px;
+left:-90px;
+transform:rotate(-18deg);
+}
+
+.topografia2{
+width:500px;
+height:300px;
+bottom:-90px;
+right:-120px;
+transform:rotate(18deg);
+}
+
+/* rosa dos ventos */
+.rosa{
 position:fixed;
-right:6vw;
-top:7vh;
-font-size:3rem;
-opacity:.65;
+top:60px;
+right:70px;
+font-size:42px;
+opacity:.75;
+}
+
+/* coordenadas */
+.coord{
+position:fixed;
+left:55px;
+bottom:50px;
+font-size:14px;
+opacity:.6;
+letter-spacing:.18em;
+line-height:1.8;
+}
+
+/* cruz cartográfica */
+.cruz{
+position:fixed;
+left:70px;
+top:80px;
+font-size:28px;
+opacity:.55;
 }
 
 .container{
-width:min(90vw,800px);
+width:min(900px,92vw);
 text-align:center;
+position:relative;
+z-index:2;
 }
 
-/* LOGO */
+/* logo */
 .logo{
-width:min(38vw,280px);
-min-width:180px;
+width:min(320px,65vw);
 display:block;
-margin:0 auto 40px;
+margin:0 auto 45px;
 }
 
 /* título */
 h1{
+font-size:clamp(1.2rem,2vw,1.8rem);
 font-weight:400;
-font-size:clamp(1.15rem,2vw,1.8rem);
 letter-spacing:.18em;
-line-height:1.6;
+line-height:1.7;
 margin-bottom:30px;
 }
 
 /* divisor */
 .divisor{
-width:min(380px,70%);
+width:min(420px,70%);
 height:1px;
 background:var(--blue);
-margin:0 auto 42px;
+margin:0 auto 45px;
 position:relative;
 }
 
-.divisor::after{
+.divisor:after{
 content:"✦";
 position:absolute;
 left:50%;
-top:-13px;
+top:-12px;
 transform:translateX(-50%);
 background:var(--bg);
 padding:0 12px;
@@ -90,22 +129,22 @@ padding:0 12px;
 
 /* texto */
 p{
-max-width:620px;
+max-width:760px;
 margin:auto;
-font-size:clamp(1rem,1.5vw,1.35rem);
-line-height:1.9;
+font-size:clamp(1rem,1.4vw,1.3rem);
+line-height:2;
 }
 
 /* botão */
 .botao{
 display:inline-block;
-margin-top:48px;
-padding:15px 34px;
-border:1.4px solid var(--blue);
+margin-top:52px;
+padding:16px 38px;
+border:1.5px solid var(--blue);
 border-radius:60px;
 text-decoration:none;
 color:var(--blue);
-font-size:clamp(.95rem,1.3vw,1.1rem);
+font-size:1rem;
 transition:.3s;
 }
 
@@ -115,16 +154,17 @@ color:var(--bg);
 }
 
 .rodape{
-margin-top:50px;
-font-size:clamp(.85rem,1vw,1rem);
-letter-spacing:.3em;
+margin-top:55px;
+font-size:.9rem;
+letter-spacing:.35em;
+opacity:.9;
 }
 
-/* MOBILE */
-@media (max-width:768px){
+/* mobile */
+@media(max-width:768px){
 
 body{
-padding:40px 22px;
+padding:55px 24px;
 }
 
 .logo{
@@ -132,26 +172,9 @@ width:220px;
 margin-bottom:32px;
 }
 
-.topo-left{
-font-size:2.6rem;
-left:18px;
-top:30px;
-}
-
-.topo-right{
-font-size:2rem;
-right:24px;
-top:35px;
-}
-
 h1{
-letter-spacing:.12em;
-line-height:1.7;
-margin-bottom:24px;
-}
-
-.divisor{
-margin-bottom:34px;
+letter-spacing:.08em;
+line-height:1.6;
 }
 
 p{
@@ -160,13 +183,33 @@ line-height:1.8;
 }
 
 .botao{
-margin-top:38px;
 padding:14px 28px;
+margin-top:38px;
 }
 
-.rodape{
-margin-top:38px;
-letter-spacing:.2em;
+.coord{
+display:none;
+}
+
+.topografia1{
+width:240px;
+height:150px;
+}
+
+.topografia2{
+width:280px;
+height:170px;
+}
+
+.rosa{
+font-size:28px;
+top:35px;
+right:30px;
+}
+
+.cruz{
+top:40px;
+left:28px;
 }
 
 }
@@ -175,8 +218,16 @@ letter-spacing:.2em;
 </head>
 <body>
 
-<div class="topo-left">⌇</div>
-<div class="topo-right">✦</div>
+<div class="topografia1"></div>
+<div class="topografia2"></div>
+
+<div class="rosa">✧</div>
+<div class="cruz">⌖</div>
+
+<div class="coord">
+08°30'S<br>
+40°30'W
+</div>
 
 <div class="container">
 
@@ -187,20 +238,16 @@ letter-spacing:.2em;
 <div class="divisor"></div>
 
 <p>
-Estamos cartografando este espaço.<br>
-Em breve o site estará no ar com projetos,<br>
-materiais educativos e mapeamentos.
+</p>Estamos cartografando este espaço. </p>
+</p>Em breve o site estará no ar com projetos, materiais educativos e mapeamentos.
 </p>
 
-<a
+<a 
 href="https://instagram.com/labmap.s"
 target="_blank"
 class="botao">
 Acompanhe no Instagram
 </a>
-
-<div class="rodape">
-✦ EM BREVE NO AR ✦
 </div>
 
 </div>
