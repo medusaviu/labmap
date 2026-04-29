@@ -2,68 +2,117 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Labmap.s</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Labmap.s — Em breve</title>
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
-margin:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 background:#F2F0EC;
-font-family: Georgia, serif;
-text-align:center;
-color:#2147B8;
+font-family: "Courier New", monospace;
+color:#2F55C7;
+overflow:hidden;
+}
+
+/* detalhes cartográficos */
+body::before{
+content:"";
+position:absolute;
+top:40px;
+left:40px;
+width:180px;
+height:180px;
+border-left:1px solid #2F55C7;
+border-radius:50%;
+opacity:.35;
+}
+
+body::after{
+content:"✦";
+position:absolute;
+top:90px;
+right:120px;
+font-size:60px;
+opacity:.7;
 }
 
 .container{
-max-width:700px;
-padding:40px;
+max-width:900px;
+text-align:center;
+padding:50px;
+position:relative;
+z-index:2;
 }
 
 .logo{
-width:220px;
-margin-bottom:30px;
+width:320px;
+margin-bottom:50px;
 }
 
 h1{
-font-size:72px;
-margin:0;
-letter-spacing:2px;
-}
-
-.sub{
-font-size:24px;
-margin-top:10px;
+font-size:48px;
+letter-spacing:4px;
+font-weight:400;
 margin-bottom:35px;
 }
 
+.divisor{
+width:420px;
+max-width:80%;
+height:1px;
+background:#2F55C7;
+margin:30px auto 45px;
+position:relative;
+}
+
+.divisor::after{
+content:"✦";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+top:-15px;
+background:#F2F0EC;
+padding:0 15px;
+}
+
 p{
-font-size:22px;
-line-height:1.6;
-max-width:600px;
+font-size:31px;
+line-height:1.7;
+max-width:820px;
 margin:auto;
 }
 
 .botao{
 display:inline-block;
-margin-top:40px;
-padding:16px 34px;
-border:2px solid #2147B8;
-border-radius:40px;
+margin-top:60px;
+padding:18px 42px;
+border:1.5px solid #2F55C7;
+border-radius:60px;
 text-decoration:none;
-color:#2147B8;
-font-weight:bold;
+color:#2F55C7;
+font-size:28px;
 transition:.3s;
 }
 
 .botao:hover{
-background:#2147B8;
+background:#2F55C7;
 color:#F2F0EC;
 }
 
+.rodape{
+margin-top:70px;
+font-size:24px;
+letter-spacing:6px;
+}
 </style>
 </head>
 
@@ -71,23 +120,26 @@ color:#F2F0EC;
 
 <div class="container">
 
-<img src="logo.png" class="logo">
+<!-- caminho da imagem -->
+<img src="lab/logo-labmap.png" alt="Labmap" class="logo">
 
-<h1>Labmap.s</h1>
+<h1>✦ EM BREVE, NOSSO SITE ESTARÁ NO AR ✦</h1>
 
-<div class="sub">
-cartografia • educação • território
-</div>
+<div class="divisor"></div>
 
 <p>
-Estamos cartografando este espaço.
+Estamos cartografando este espaço.<br>
 Em breve o site estará no ar com projetos,
 materiais educativos e mapeamentos.
 </p>
 
 <a href="https://instagram.com/labmap.s" class="botao">
-acompanhar no instagram
+Acompanhe no Instagram
 </a>
+
+<div class="rodape">
+✦ EM BREVE NO AR ✦
+</div>
 
 </div>
 
